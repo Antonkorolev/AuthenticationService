@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendService.Contracts", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendService.Client", "src\BackendService.Client\BackendService.Client.csproj", "{9FE4795D-9193-409F-8536-CF39C85FAA65}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2A4F0268-52D4-482E-BDCC-F0029327D7E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendService.UnitTests", "test\BackendService.UnitTests\BackendService.UnitTests.csproj", "{401B2193-1ACD-47C1-998D-8018F2E56B38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,7 @@ Global
 		{C4A02575-0AFD-4878-B998-FDB5EE9BE29E} = {1137349A-E55C-49F4-9A98-BE7DABADF94C}
 		{51A91275-D180-41AE-A153-0FF4AC59C805} = {DABF8BD2-E9D3-4DD7-A684-9502CD40FFB9}
 		{9FE4795D-9193-409F-8536-CF39C85FAA65} = {DABF8BD2-E9D3-4DD7-A684-9502CD40FFB9}
+		{401B2193-1ACD-47C1-998D-8018F2E56B38} = {2A4F0268-52D4-482E-BDCC-F0029327D7E3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{97D01EAD-D455-4A71-9259-726A620181B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,5 +52,9 @@ Global
 		{9FE4795D-9193-409F-8536-CF39C85FAA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE4795D-9193-409F-8536-CF39C85FAA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE4795D-9193-409F-8536-CF39C85FAA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401B2193-1ACD-47C1-998D-8018F2E56B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{401B2193-1ACD-47C1-998D-8018F2E56B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{401B2193-1ACD-47C1-998D-8018F2E56B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{401B2193-1ACD-47C1-998D-8018F2E56B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
