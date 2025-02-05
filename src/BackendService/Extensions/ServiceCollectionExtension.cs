@@ -1,4 +1,6 @@
 using BackendService.BusinessLogic.Operations.AddUser;
+using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSalt;
+using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.HashPassword;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
@@ -37,6 +39,8 @@ public static class ServiceCollectionExtension
         services.AddTransient<IAddUserOperation, AddUserOperation>();
         services.AddTransient<IHashPasswordTask, HashPasswordTask>();
         services.AddTransient<IUserAdditionTask, UserAdditionTask>();
+        services.AddTransient<IGetSettingsTask, GetSettingsTask>();
+        services.AddTransient<IGetSaltTask, GetSaltTask>();
 
         return services;
     }

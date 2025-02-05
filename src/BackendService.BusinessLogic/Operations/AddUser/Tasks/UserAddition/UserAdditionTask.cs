@@ -12,9 +12,9 @@ public class UserAdditionTask : IUserAdditionTask
         _dbContext = dbContext;
     }
 
-    public async Task AddAsync(string login, string hash)
+    public async Task AddAsync(string login, string hash, string salt)
     {
-        await _dbContext.User.AddAsync(new User { Login = login, Password = hash });
+        await _dbContext.User.AddAsync(new User { Login = login, Password = hash, Salt = salt});
 
         await _dbContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
     }
