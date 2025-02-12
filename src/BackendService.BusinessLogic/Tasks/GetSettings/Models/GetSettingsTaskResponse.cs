@@ -1,4 +1,4 @@
-namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings.Models;
+namespace BackendService.BusinessLogic.Tasks.GetSettings.Models;
 
 public sealed class GetSettingsTaskResponse(int workFactor, char bcryptMinorRevision)
 {

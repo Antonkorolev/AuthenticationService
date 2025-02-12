@@ -1,6 +1,6 @@
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
 using BackendService.BusinessLogic.Operations.AuthenticateUser.Models;
-using BackendService.BusinessLogic.Operations.AuthenticateUser.Tasks.ValidateUser;
+using BackendService.BusinessLogic.Tasks.ValidateUser;
 using DatabaseContext.UserDb;
 using DatabaseContext.UserDb.Models;
 using Microsoft.EntityFrameworkCore;

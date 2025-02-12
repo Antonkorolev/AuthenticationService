@@ -1,10 +1,10 @@
 using BackendService.BusinessLogic.Operations.AddUser;
 using BackendService.BusinessLogic.Operations.AddUser.Models;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSalt;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings.Models;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.HashPassword;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
+using BackendService.BusinessLogic.Tasks.GetSalt;
+using BackendService.BusinessLogic.Tasks.GetSettings;
+using BackendService.BusinessLogic.Tasks.GetSettings.Models;
+using BackendService.BusinessLogic.Tasks.HashPassword;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

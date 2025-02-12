@@ -2,7 +2,7 @@ using BackendService.BusinessLogic.Exceptions;
 using DatabaseContext.UserDb.Models;
 using HashingProvider = BCrypt.Net.BCrypt;
 
-namespace BackendService.BusinessLogic.Operations.AuthenticateUser.Tasks.ValidateUser;
+namespace BackendService.BusinessLogic.Tasks.ValidateUser;
 
 public sealed class ValidateUserTask : IValidateUserTask
 {

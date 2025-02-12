@@ -1,10 +1,10 @@
 using BackendService.BusinessLogic.Exceptions;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings.Models;
+using BackendService.BusinessLogic.Tasks.GetSettings.Models;
 using DatabaseContext.UserDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings;
+namespace BackendService.BusinessLogic.Tasks.GetSettings;
 
 public sealed class GetSettingsTask : IGetSettingsTask
 {

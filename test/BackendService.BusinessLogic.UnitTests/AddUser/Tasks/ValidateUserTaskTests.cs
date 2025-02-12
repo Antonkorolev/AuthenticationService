@@ -1,5 +1,5 @@
 using BackendService.BusinessLogic.Exceptions;
-using BackendService.BusinessLogic.Operations.AuthenticateUser.Tasks.ValidateUser;
+using BackendService.BusinessLogic.Tasks.ValidateUser;
 using DatabaseContext.UserDb.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

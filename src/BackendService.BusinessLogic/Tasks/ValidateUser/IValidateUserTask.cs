@@ -1,6 +1,6 @@
 using DatabaseContext.UserDb.Models;
 
-namespace BackendService.BusinessLogic.Operations.AuthenticateUser.Tasks.ValidateUser;
+namespace BackendService.BusinessLogic.Tasks.ValidateUser;
 
 public interface IValidateUserTask
 {

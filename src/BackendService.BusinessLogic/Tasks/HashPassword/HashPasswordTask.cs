@@ -1,6 +1,6 @@
 using HashingProvider = BCrypt.Net.BCrypt;
 
-namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.HashPassword;
+namespace BackendService.BusinessLogic.Tasks.HashPassword;
 
 public sealed class HashPasswordTask : IHashPasswordTask
 {

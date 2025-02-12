@@ -1,4 +1,4 @@
-namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.HashPassword;
+namespace BackendService.BusinessLogic.Tasks.HashPassword;
 
 public interface IHashPasswordTask
 {

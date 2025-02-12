@@ -1,10 +1,10 @@
 using BackendService.BusinessLogic.Operations.AddUser;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSalt;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.HashPassword;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
-using BackendService.BusinessLogic.Operations.AuthenticateUser.Tasks.ValidateUser;
+using BackendService.BusinessLogic.Tasks.GetSalt;
+using BackendService.BusinessLogic.Tasks.GetSettings;
+using BackendService.BusinessLogic.Tasks.HashPassword;
+using BackendService.BusinessLogic.Tasks.ValidateUser;
 using DatabaseContext.UserDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,10 +37,17 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddAddUserOperation(this IServiceCollection services)
     {
         services.AddTransient<IAddUserOperation, AddUserOperation>();
-        services.AddTransient<IHashPasswordTask, HashPasswordTask>();
         services.AddTransient<IUserAdditionTask, UserAdditionTask>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddCommonTasks(this IServiceCollection services)
+    {
+        services.AddTransient<IHashPasswordTask, HashPasswordTask>();
         services.AddTransient<IGetSettingsTask, GetSettingsTask>();
         services.AddTransient<IGetSaltTask, GetSaltTask>();
+        services.AddTransient<IValidateUserTask, ValidateUserTask>();
 
         return services;
     }

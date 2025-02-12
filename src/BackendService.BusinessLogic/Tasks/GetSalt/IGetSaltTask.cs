@@ -1,4 +1,4 @@
-namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSalt;
+namespace BackendService.BusinessLogic.Tasks.GetSalt;
 
 public interface IGetSaltTask
 {

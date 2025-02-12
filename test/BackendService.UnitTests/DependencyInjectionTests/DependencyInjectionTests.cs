@@ -41,6 +41,7 @@ public sealed class DependencyInjectionTests
         serviceCollection.AddUserDbContext("UserDb", configuration);
         serviceCollection.AddAuthenticateUserOperation();
         serviceCollection.AddAddUserOperation();
+        serviceCollection.AddCommonTasks();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

@@ -1,5 +1,5 @@
 using BackendService.BusinessLogic.Exceptions;
-using BackendService.BusinessLogic.Operations.AddUser.Tasks.GetSettings;
+using BackendService.BusinessLogic.Tasks.GetSettings;
 using DatabaseContext.UserDb;
 using DatabaseContext.UserDb.Models;
 using Microsoft.EntityFrameworkCore;
