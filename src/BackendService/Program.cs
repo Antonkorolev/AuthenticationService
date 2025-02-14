@@ -22,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddUserDbContext("UserDb", configuration);
 builder.Services.AddAuthenticateUserOperation();
 builder.Services.AddAddUserOperation();
+builder.Services.AddChangePasswordOperation();
 builder.Services.AddCommonTasks();
 builder.Services.AddSwaggerGen();
 

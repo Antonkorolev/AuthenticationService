@@ -5,7 +5,7 @@ using BackendService.Contracts.AuthenticateUser;
 
 namespace BackendService.Client;
 
-public class AuthenticateService : IAuthenticateService
+public sealed class AuthenticateService : IAuthenticateService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly string _httpClientName;

@@ -20,12 +20,10 @@ public sealed class ValidateUserTaskTests
     [TestMethod]
     public async Task ValidateUserTask_ReturnsTrue()
     {
-        const string login = "testLogin";
         const string pass = "test1";
-        const string expectedPass = "$2b$12$RIVEHrguMT6i0j5hH0x4NuR4l3QWdwl8kvG7NaQDAxHxVibCMudGO";
-        const string salt = "$2b$12$RIVEHrguMT6i0j5hH0x4Nu";
+        const string hash = "$2b$12$RIVEHrguMT6i0j5hH0x4NuR4l3QWdwl8kvG7NaQDAxHxVibCMudGO";
 
-        var result = await _validateUserTask.ValidateAsync(new User { UserId = 1, Login = login, Password = expectedPass, Salt = salt }, login, pass);
+        var result = await _validateUserTask.ValidateAsync(pass, hash);
         
         Assert.IsTrue(result);
     }
@@ -35,10 +33,10 @@ public sealed class ValidateUserTaskTests
     {
         const string login = "testLogin";
         const string pass = "test";
-        const string expectedPass = "$2b$12$RIVEHrguMT6i0j5hH0x4NuR4l3QWdwl8kvG7NaQDAxHxVibCMudGO";
+        const string hash = "$2b$12$RIVEHrguMT6i0j5hH0x4NuR4l3QWdwl8kvG7NaQDAxHxVibCMudGO";
         const string salt = "$2b$12$RIVEHrguMT6i0j5hH0x4Nu";
 
-        var result = await _validateUserTask.ValidateAsync(new User { UserId = 1, Login = login, Password = expectedPass, Salt = salt }, login, pass);
+        var result = await _validateUserTask.ValidateAsync(pass, hash);
         
         Assert.IsFalse(result);
     }
@@ -49,7 +47,7 @@ public sealed class ValidateUserTaskTests
         const string login = "testLogin";
         const string pass = "test";
         
-        var exception = await Assert.ThrowsExceptionAsync<UserNotFoundException>(() => _validateUserTask.ValidateAsync(null, login, pass));
+        var exception = await Assert.ThrowsExceptionAsync<UserNotFoundException>(() => _validateUserTask.ValidateAsync(pass, null));
         
         Assert.AreEqual($"User not found by login: {login}", exception.Message);
     }

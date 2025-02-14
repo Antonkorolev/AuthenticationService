@@ -1,6 +1,7 @@
 using System.Text;
 using BackendService.BusinessLogic.Operations.AddUser;
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
+using BackendService.BusinessLogic.Operations.ChangePassword;
 using BackendService.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,7 @@ public sealed class DependencyInjectionTests
         serviceCollection.AddUserDbContext("UserDb", configuration);
         serviceCollection.AddAuthenticateUserOperation();
         serviceCollection.AddAddUserOperation();
+        serviceCollection.AddChangePasswordOperation();
         serviceCollection.AddCommonTasks();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -58,6 +60,14 @@ public sealed class DependencyInjectionTests
     public void AddAddUserOperation_ConfigureCorrectly()
     {
         var service = _serviceProvider.GetService<IAddUserOperation>();
+
+        Assert.IsNotNull(service);
+    }
+    
+    [TestMethod]
+    public void ChangePasswordOperation_ConfigureCorrectly()
+    {
+        var service = _serviceProvider.GetService<IChangePasswordOperation>();
 
         Assert.IsNotNull(service);
     }

@@ -1,29 +1,30 @@
 using BackendService.BusinessLogic.Operations.AuthenticateUser.Models;
+using BackendService.BusinessLogic.Tasks.GetHash;
 using BackendService.BusinessLogic.Tasks.ValidateUser;
-using DatabaseContext.UserDb;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace BackendService.BusinessLogic.Operations.AuthenticateUser;
 
 public sealed class AuthenticateUserOperation : IAuthenticateUserOperation
 {
-    private readonly IUserDbContext _dbContext;
     private readonly IValidateUserTask _validateUserTask;
+    private readonly IGetHashTask _getHashTask;
     private readonly ILogger<AuthenticateUserOperation> _logger;
 
-    public AuthenticateUserOperation(IUserDbContext dbContext, IValidateUserTask validateUserTask, ILogger<AuthenticateUserOperation> logger)
+    public AuthenticateUserOperation(
+        IValidateUserTask validateUserTask,
+        IGetHashTask getHashTask,
+        ILogger<AuthenticateUserOperation> logger)
     {
-        _dbContext = dbContext;
         _validateUserTask = validateUserTask;
+        _getHashTask = getHashTask;
         _logger = logger;
     }
 
     public async Task<AuthenticateUserOperationResponse> AuthenticateAsync(AuthenticateUserOperationRequest request)
     {
-        var user = await _dbContext.User.FirstOrDefaultAsync(u => u.Login == request.Login.Trim()).ConfigureAwait(false);
-
-        var isVerified = await _validateUserTask.ValidateAsync(user, request.Login, request.Password).ConfigureAwait(false);
+        var hash = await _getHashTask.GetAsync(request.Login).ConfigureAwait(false);
+        var isVerified = await _validateUserTask.ValidateAsync(request.Password, hash).ConfigureAwait(false);
 
         _logger.LogInformation($"User authentication is {isVerified}");
 

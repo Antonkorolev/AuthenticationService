@@ -1,5 +1,6 @@
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
 using BackendService.BusinessLogic.Operations.AuthenticateUser.Models;
+using BackendService.BusinessLogic.Tasks.GetHash;
 using BackendService.BusinessLogic.Tasks.ValidateUser;
 using DatabaseContext.UserDb;
 using DatabaseContext.UserDb.Models;
@@ -16,6 +17,7 @@ public sealed class AuthenticateUserOperationTests
 {
     private IUserDbContext _userDbContext = default!;
     private Mock<IValidateUserTask> _validateUserTask = default!;
+    private Mock<IGetHashTask> _getHashTask = default!;
     private Mock<ILogger<AuthenticateUserOperation>> _logger = default!;
     private IAuthenticateUserOperation _authenticateUserOperation = default!;
 
@@ -28,11 +30,12 @@ public sealed class AuthenticateUserOperationTests
             .Options);
 
         _validateUserTask = new Mock<IValidateUserTask>();
+        _getHashTask = new Mock<IGetHashTask>();
         _logger = new Mock<ILogger<AuthenticateUserOperation>>();
 
         _authenticateUserOperation = new AuthenticateUserOperation(
-            _userDbContext,
             _validateUserTask.Object,
+            _getHashTask.Object,
             _logger.Object);
     }
 
@@ -44,13 +47,13 @@ public sealed class AuthenticateUserOperationTests
         const string salt = "123";
 
         _validateUserTask
-            .Setup(d => d.ValidateAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Setup(d => d.ValidateAsync(It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(true);
 
         _userDbContext.User.Add(new User { UserId = 1, Login = login, Password = pass,  Salt = salt});
 
         await _authenticateUserOperation.AuthenticateAsync(new AuthenticateUserOperationRequest(login, pass)).ConfigureAwait(false);
 
-        _validateUserTask.Verify(a => a.ValidateAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        _validateUserTask.Verify(a => a.ValidateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
 }

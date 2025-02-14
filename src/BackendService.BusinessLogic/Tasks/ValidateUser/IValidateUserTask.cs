@@ -4,5 +4,5 @@ namespace BackendService.BusinessLogic.Tasks.ValidateUser;
 
 public interface IValidateUserTask
 {
-    Task<bool> ValidateAsync(User? user, string login, string password);
+    Task<bool> ValidateAsync(string password, string hash);
 }

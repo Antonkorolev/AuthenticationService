@@ -1,4 +1,3 @@
-using BackendService.BusinessLogic.Exceptions;
 using DatabaseContext.UserDb.Models;
 using HashingProvider = BCrypt.Net.BCrypt;
 
@@ -6,12 +5,9 @@ namespace BackendService.BusinessLogic.Tasks.ValidateUser;
 
 public sealed class ValidateUserTask : IValidateUserTask
 {
-    public Task<bool> ValidateAsync(User? user, string login, string password)
+    public Task<bool> ValidateAsync(string password, string hash)
     {
-        if (user == null)
-            throw new UserNotFoundException($"User not found by login: {login}");
-
-        var isVerified = HashingProvider.Verify(password, user.Password);
+        var isVerified = HashingProvider.Verify(password, hash);
 
         return Task.FromResult(isVerified);
     }
