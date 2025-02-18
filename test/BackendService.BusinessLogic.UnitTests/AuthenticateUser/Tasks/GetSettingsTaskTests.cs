@@ -15,9 +15,9 @@ public sealed class GetSettingsTaskTests
 {
     public TestContext TestContext { get; set; } = default!;
     
-    private IUserDbContext _userDbContext;
-    private Mock<ILogger<GetSettingsTask>> _logger;
-    private IGetSettingsTask _getSettingsTask;
+    private IUserDbContext _userDbContext = default!;
+    private Mock<ILogger<GetSettingsTask>> _logger = default!;
+    private IGetSettingsTask _getSettingsTask = default!;
 
     [TestInitialize]
     public void TestInitialize()

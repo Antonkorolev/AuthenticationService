@@ -9,8 +9,8 @@ namespace BackendService.BusinessLogic.UnitTests.AuthenticateUser.Tasks;
 [TestClass]
 public sealed class UserAdditionTaskTests
 {
-    private UserDbContext _userDbContext;
-    private IUserAdditionTask _userAdditionTask;
+    private UserDbContext _userDbContext = default!;
+    private IUserAdditionTask _userAdditionTask = default!;
 
     [TestInitialize]
     public void TestInitialize()

@@ -6,23 +6,14 @@ using Microsoft.Extensions.Logging;
 
 namespace BackendService.BusinessLogic.Tasks.GetSettings;
 
-public sealed class GetSettingsTask : IGetSettingsTask
+public sealed class GetSettingsTask(IUserDbContext userDbContext, ILogger<GetSettingsTask> logger) : IGetSettingsTask
 {
     private const string WorkFactor = "WorkFactor";
     private const string BcryptMinorRevision = "BcryptMinorRevision";
-    
-    private readonly IUserDbContext _userDbContext;
-    private readonly ILogger<GetSettingsTask> _logger;
 
-    public GetSettingsTask(IUserDbContext userDbContext, ILogger<GetSettingsTask> logger)
-    {
-        _userDbContext = userDbContext;
-        _logger = logger;
-    }
-    
     public async Task<GetSettingsTaskResponse> GetAsync()
     {
-        var settings = await _userDbContext.Settings.ToArrayAsync().ConfigureAwait(false);
+        var settings = await userDbContext.Settings.ToArrayAsync().ConfigureAwait(false);
 
         var workFactor = settings.FirstOrDefault(s => s.Key == WorkFactor)?.Value;
 
@@ -34,7 +25,7 @@ public sealed class GetSettingsTask : IGetSettingsTask
         if (bcryptMinorRevision == null)
             throw new SettingNotFoundException(BcryptMinorRevision);
         
-        _logger.LogInformation($"Settings for {WorkFactor} and {BcryptMinorRevision} successfully received");
+        logger.LogInformation($"Settings for {WorkFactor} and {BcryptMinorRevision} successfully received");
         
         return new GetSettingsTaskResponse(int.Parse(workFactor), char.Parse(bcryptMinorRevision));
     }

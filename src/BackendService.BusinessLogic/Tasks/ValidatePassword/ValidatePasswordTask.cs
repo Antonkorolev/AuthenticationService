@@ -1,9 +1,8 @@
-using DatabaseContext.UserDb.Models;
 using HashingProvider = BCrypt.Net.BCrypt;
 
-namespace BackendService.BusinessLogic.Tasks.ValidateUser;
+namespace BackendService.BusinessLogic.Tasks.ValidatePassword;
 
-public sealed class ValidateUserTask : IValidateUserTask
+public sealed class ValidatePasswordTask : IValidatePasswordTask
 {
     public Task<bool> ValidateAsync(string password, string hash)
     {

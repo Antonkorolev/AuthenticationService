@@ -3,19 +3,12 @@ using DatabaseContext.UserDb.Models;
 
 namespace BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
 
-public class UserAdditionTask : IUserAdditionTask
+public sealed class UserAdditionTask(IUserDbContext dbContext) : IUserAdditionTask
 {
-    private readonly IUserDbContext _dbContext;
-
-    public UserAdditionTask(IUserDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task AddAsync(string login, string hash, string salt)
     {
-        await _dbContext.User.AddAsync(new User { Login = login, Password = hash, Salt = salt});
+        await dbContext.User.AddAsync(new User { Login = login, Password = hash, Salt = salt});
 
-        await _dbContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+        await dbContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
     }
 }

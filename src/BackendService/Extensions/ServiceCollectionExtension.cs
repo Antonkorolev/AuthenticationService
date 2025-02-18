@@ -3,11 +3,12 @@ using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
 using BackendService.BusinessLogic.Operations.ChangePassword;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ChangePassword;
+using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ValidateOldPassword;
 using BackendService.BusinessLogic.Tasks.GetHash;
 using BackendService.BusinessLogic.Tasks.GetSalt;
 using BackendService.BusinessLogic.Tasks.GetSettings;
 using BackendService.BusinessLogic.Tasks.HashPassword;
-using BackendService.BusinessLogic.Tasks.ValidateUser;
+using BackendService.BusinessLogic.Tasks.ValidatePassword;
 using DatabaseContext.UserDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddAuthenticateUserOperation(this IServiceCollection services)
     {
         services.AddTransient<IAuthenticateUserOperation, AuthenticateUserOperation>();
-        services.AddTransient<IValidateUserTask, ValidateUserTask>();
+        services.AddTransient<IValidatePasswordTask, ValidatePasswordTask>();
 
         return services;
     }
@@ -48,6 +49,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddChangePasswordOperation(this IServiceCollection services)
     {
         services.AddTransient<IChangePasswordOperation, ChangePasswordOperation>();
+        services.AddTransient<IValidateOldPasswordTask, ValidateOldPasswordTask>();
         services.AddTransient<IChangePasswordTask, ChangePasswordTask>();
 
         return services;
@@ -58,7 +60,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IHashPasswordTask, HashPasswordTask>();
         services.AddTransient<IGetSettingsTask, GetSettingsTask>();
         services.AddTransient<IGetSaltTask, GetSaltTask>();
-        services.AddTransient<IValidateUserTask, ValidateUserTask>();
+        services.AddTransient<IValidatePasswordTask, ValidatePasswordTask>();
         services.AddTransient<IGetHashTask, GetHashTask>();
 
         return services;

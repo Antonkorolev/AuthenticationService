@@ -1,7 +1,7 @@
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
 using BackendService.BusinessLogic.Operations.AuthenticateUser.Models;
 using BackendService.BusinessLogic.Tasks.GetHash;
-using BackendService.BusinessLogic.Tasks.ValidateUser;
+using BackendService.BusinessLogic.Tasks.ValidatePassword;
 using DatabaseContext.UserDb;
 using DatabaseContext.UserDb.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,7 @@ namespace BackendService.BusinessLogic.UnitTests.AddUser;
 public sealed class AuthenticateUserOperationTests
 {
     private IUserDbContext _userDbContext = default!;
-    private Mock<IValidateUserTask> _validateUserTask = default!;
+    private Mock<IValidatePasswordTask> _validateUserTask = default!;
     private Mock<IGetHashTask> _getHashTask = default!;
     private Mock<ILogger<AuthenticateUserOperation>> _logger = default!;
     private IAuthenticateUserOperation _authenticateUserOperation = default!;
@@ -29,7 +29,7 @@ public sealed class AuthenticateUserOperationTests
             .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options);
 
-        _validateUserTask = new Mock<IValidateUserTask>();
+        _validateUserTask = new Mock<IValidatePasswordTask>();
         _getHashTask = new Mock<IGetHashTask>();
         _logger = new Mock<ILogger<AuthenticateUserOperation>>();
 
