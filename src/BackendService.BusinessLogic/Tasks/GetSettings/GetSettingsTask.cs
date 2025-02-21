@@ -2,11 +2,10 @@ using BackendService.BusinessLogic.Exceptions;
 using BackendService.BusinessLogic.Tasks.GetSettings.Models;
 using DatabaseContext.UserDb;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace BackendService.BusinessLogic.Tasks.GetSettings;
 
-public sealed class GetSettingsTask(IUserDbContext userDbContext, ILogger<GetSettingsTask> logger) : IGetSettingsTask
+public sealed class GetSettingsTask(IUserDbContext userDbContext) : IGetSettingsTask
 {
     private const string WorkFactor = "WorkFactor";
     private const string BcryptMinorRevision = "BcryptMinorRevision";
@@ -24,8 +23,6 @@ public sealed class GetSettingsTask(IUserDbContext userDbContext, ILogger<GetSet
         
         if (bcryptMinorRevision == null)
             throw new SettingNotFoundException(BcryptMinorRevision);
-        
-        logger.LogInformation($"Settings for {WorkFactor} and {BcryptMinorRevision} successfully received");
         
         return new GetSettingsTaskResponse(int.Parse(workFactor), char.Parse(bcryptMinorRevision));
     }

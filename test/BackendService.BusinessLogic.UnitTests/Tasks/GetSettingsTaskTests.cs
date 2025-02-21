@@ -4,11 +4,9 @@ using DatabaseContext.UserDb;
 using DatabaseContext.UserDb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
-namespace BackendService.BusinessLogic.UnitTests.AuthenticateUser.Tasks;
+namespace BackendService.BusinessLogic.UnitTests.Tasks;
 
 [TestClass]
 public sealed class GetSettingsTaskTests
@@ -16,7 +14,6 @@ public sealed class GetSettingsTaskTests
     public TestContext TestContext { get; set; } = default!;
     
     private IUserDbContext _userDbContext = default!;
-    private Mock<ILogger<GetSettingsTask>> _logger = default!;
     private IGetSettingsTask _getSettingsTask = default!;
 
     [TestInitialize]
@@ -27,9 +24,7 @@ public sealed class GetSettingsTaskTests
             .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
             .Options);
 
-        _logger = new Mock<ILogger<GetSettingsTask>>();
-
-        _getSettingsTask = new GetSettingsTask(_userDbContext, _logger.Object);
+        _getSettingsTask = new GetSettingsTask(_userDbContext);
     }
 
     [TestMethod]

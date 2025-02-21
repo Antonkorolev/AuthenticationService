@@ -1,14 +1,11 @@
-using BackendService.BusinessLogic.Exceptions;
 using BackendService.BusinessLogic.Tasks.ValidatePassword;
-using DatabaseContext.UserDb.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BackendService.BusinessLogic.UnitTests.AddUser.Tasks;
+namespace BackendService.BusinessLogic.UnitTests.Tasks;
 
 [TestClass]
 public sealed class ValidatePasswordTaskTests
 {
-    
     private IValidatePasswordTask _validatePasswordTask = default!;
 
     [TestInitialize]

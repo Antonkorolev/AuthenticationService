@@ -1,7 +1,7 @@
 using BackendService.BusinessLogic.Tasks.GetSalt;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BackendService.BusinessLogic.UnitTests.AuthenticateUser.Tasks;
+namespace BackendService.BusinessLogic.UnitTests.Tasks;
 
 [TestClass]
 public sealed class GetSaltTaskTests

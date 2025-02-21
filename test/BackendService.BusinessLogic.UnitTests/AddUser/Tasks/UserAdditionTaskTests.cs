@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BackendService.BusinessLogic.UnitTests.AuthenticateUser.Tasks;
+namespace BackendService.BusinessLogic.UnitTests.AddUser.Tasks;
 
 [TestClass]
 public sealed class UserAdditionTaskTests
