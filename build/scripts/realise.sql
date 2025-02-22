@@ -20,6 +20,8 @@ CREATE TABLE [dbo].[User]
     )
 END
 
+IF NOT EXISTS (SELECT name FROM [sys].[indexes] WHERE name = 'UQ_User_Login')
+    CREATE UNIQUE INDEX [UQ_User_Login] ON [dbo].[User](Login);
 GO
 
 IF OBJECT_ID(N'dbo.Settings', N'U') IS NULL
