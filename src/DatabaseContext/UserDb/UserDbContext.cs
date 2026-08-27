@@ -14,7 +14,7 @@ public class UserDbContext : DbContext, IUserDbContext
     {
     }
 
-    public void OnModelCreation(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new UserConfiguration());
         builder.ApplyConfiguration(new SettingsConfiguration());
