@@ -24,6 +24,7 @@ builder.Services.AddAuthenticateUserOperation();
 builder.Services.AddAddUserOperation();
 builder.Services.AddChangePasswordOperation();
 builder.Services.AddCommonTasks();
+builder.Services.AddAuthorizationServiceClient("AddAuthorizationServiceClient", configuration);
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

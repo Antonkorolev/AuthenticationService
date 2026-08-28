@@ -65,4 +65,15 @@ public static class ServiceCollectionExtension
 
         return services;
     }
+
+    public static IServiceCollection AddAuthorizationServiceClient(this IServiceCollection services, string name, IConfiguration configuration)
+    {
+        services.AddHttpClient(name, client =>
+        {
+            client.BaseAddress = configuration.GetValue<Uri>($"Services:{name}:BaseUrl");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
+
+        return services;
+    }
 }
