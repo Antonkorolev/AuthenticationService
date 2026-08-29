@@ -1,3 +1,5 @@
+using BackendService.AuthorizationService.Client;
+using BackendService.AuthorizationService.Contracts;
 using BackendService.BusinessLogic.Operations.AddUser;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
 using BackendService.BusinessLogic.Operations.AuthenticateUser;
@@ -68,11 +70,13 @@ public static class ServiceCollectionExtension
 
     public static IServiceCollection AddAuthorizationServiceClient(this IServiceCollection services, string name, IConfiguration configuration)
     {
-        services.AddHttpClient(name, client =>
+        services.AddHttpClient(nameof(AuthorizationServiceClient), client =>
         {
             client.BaseAddress = configuration.GetValue<Uri>($"Services:{name}:BaseUrl");
             client.Timeout = TimeSpan.FromSeconds(30);
         });
+
+        services.AddScoped<IAuthorizationServiceClient, AuthorizationServiceClient>();
 
         return services;
     }

@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BackendService.AuthorizationService.Client\BackendService.AuthorizationService.Client.csproj" />
       <ProjectReference Include="..\BackendService.BusinessLogic\BackendService.BusinessLogic.csproj" />
       <ProjectReference Include="..\BackendService.Contracts\BackendService.Contracts.csproj" />
     </ItemGroup>

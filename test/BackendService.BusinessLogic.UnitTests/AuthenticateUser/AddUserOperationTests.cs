@@ -1,3 +1,4 @@
+using BackendService.AuthorizationService.Contracts;
 using BackendService.BusinessLogic.Operations.AddUser;
 using BackendService.BusinessLogic.Operations.AddUser.Models;
 using BackendService.BusinessLogic.Operations.AddUser.Tasks.UserAddition;
@@ -19,6 +20,7 @@ public sealed class AddUserOperationTests
     private Mock<IGetSaltTask> _getSaltTask = default!;
     private Mock<IGetSettingsTask> _getSettingsTask = default!;
     private Mock<ILogger<AddUserOperation>> _logger = default!;
+    private Mock<IAuthorizationServiceClient> _authorizationServiceClient = default!;
     private AddUserOperation _addUserOperation = default!;
 
     [TestInitialize]
@@ -28,6 +30,7 @@ public sealed class AddUserOperationTests
         _userAdditionTask = new Mock<IUserAdditionTask>();
         _getSaltTask = new Mock<IGetSaltTask>();
         _getSettingsTask = new Mock<IGetSettingsTask>();
+        _authorizationServiceClient = new Mock<IAuthorizationServiceClient>();
         _logger = new Mock<ILogger<AddUserOperation>>();
 
         _addUserOperation = new AddUserOperation(
@@ -35,6 +38,7 @@ public sealed class AddUserOperationTests
             _userAdditionTask.Object,
             _getSaltTask.Object,
             _getSettingsTask.Object,
+            _authorizationServiceClient.Object,
             _logger.Object);
     }
 
@@ -60,7 +64,7 @@ public sealed class AddUserOperationTests
             .Setup(g => g.GetAsync())
             .ReturnsAsync(() => new GetSettingsTaskResponse(It.IsAny<int>(), It.IsAny<char>()));
 
-        await _addUserOperation.AddAsync(new AddUserOperationRequest(login, pass));
+        await _addUserOperation.AddAsync(new AddUserOperationRequest(login, pass, []));
 
         _hashPasswordTask.Verify(h => h.HashAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         _userAdditionTask.Verify(h => h.AddAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);

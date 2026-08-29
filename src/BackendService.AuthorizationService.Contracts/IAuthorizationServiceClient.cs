@@ -3,7 +3,7 @@ using BackendService.AuthorizationService.Contracts.Response;
 
 namespace BackendService.AuthorizationService.Contracts;
 
-public interface IAuthorizationService
+public interface IAuthorizationServiceClient
 {
     Task<GetPermissionsResponse> GetPermissionsAsync(GetPermissionsRequest request);
 

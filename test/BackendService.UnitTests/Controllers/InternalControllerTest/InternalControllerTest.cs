@@ -26,7 +26,7 @@ public sealed class InternalControllerTest
     [TestMethod]
     public async Task AddUserOperation_ReturnsActionResult()
     {
-        var response = await _internalController.AddUserAsync(new AddUserRequest("login", "pass"))
+        var response = await _internalController.AddUserAsync(new AddUserRequest("login", "pass", []))
             .ConfigureAwait(false);
 
         Assert.IsInstanceOfType(response, typeof(IActionResult));

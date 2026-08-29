@@ -5,7 +5,7 @@ using BackendService.AuthorizationService.Contracts.Response;
 
 namespace BackendService.AuthorizationService.Client;
 
-public sealed class AuthorizationServiceClient(IHttpClientFactory httpClientFactory) : IAuthorizationService
+public sealed class AuthorizationServiceClient(IHttpClientFactory httpClientFactory) : IAuthorizationServiceClient
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient(nameof(AuthorizationServiceClient));
 
