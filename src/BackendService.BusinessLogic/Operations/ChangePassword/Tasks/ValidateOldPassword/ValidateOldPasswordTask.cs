@@ -9,8 +9,8 @@ public sealed class ValidateOldPasswordTask(IGetHashTask getHashTask, IValidateP
 {
     public async Task ValidateAsync(ValidateOldPasswordTaskRequest request)
     {
-        var oldHash = await getHashTask.GetAsync(request.Login).ConfigureAwait(false);
-        var isVerified = await validatePasswordTask.ValidateAsync(request.Password, oldHash).ConfigureAwait(false);
+        var getHashTaskResponse = await getHashTask.GetAsync(request.Login).ConfigureAwait(false);
+        var isVerified = await validatePasswordTask.ValidateAsync(request.Password, getHashTaskResponse.Password).ConfigureAwait(false);
 
         if (!isVerified)
             throw new UserVerifiedException("User not verified");

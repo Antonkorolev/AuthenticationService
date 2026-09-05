@@ -1,6 +1,6 @@
 namespace BackendService.BusinessLogic.Operations.AuthenticateUser.Models;
 
-public sealed class AuthenticateUserOperationResponse(bool isAuthenticated)
+public sealed class AuthenticateUserOperationResponse(string token)
 {
-    public bool IsAuthenticated { get; set; } = isAuthenticated;
+    public string Token { get; } = token;
 }
