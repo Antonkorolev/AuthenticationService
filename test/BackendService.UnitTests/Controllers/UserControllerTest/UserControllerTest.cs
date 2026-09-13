@@ -27,7 +27,7 @@ public sealed class UserControllerTest
     {
         _authenticateUserOperation
             .Setup(u => u.AuthenticateAsync(It.IsAny<AuthenticateUserOperationRequest>()))
-            .ReturnsAsync(new AuthenticateUserOperationResponse(true));
+            .ReturnsAsync(new AuthenticateUserOperationResponse("token"));
 
         var response = await _userController.AuthenticateUserAsync(new AuthenticateUserRequest("login", "pass"))
             .ConfigureAwait(false);
@@ -40,6 +40,6 @@ public sealed class UserControllerTest
 
         var authenticationUserResponse = result.Value as AuthenticateUserResponse;
 
-        Assert.IsTrue(authenticationUserResponse?.IsAuthenticated);
+        Assert.AreEqual("token", authenticationUserResponse?.Token);
     }
 }

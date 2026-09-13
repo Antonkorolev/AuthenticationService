@@ -7,7 +7,7 @@ namespace BackendService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController(IAuthenticateUserOperation authenticateUserOperation) : ControllerBase
+public sealed class UserController(IAuthenticateUserOperation authenticateUserOperation) : ControllerBase
 {
     [HttpPost("Authenticate")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -16,6 +16,6 @@ public class UserController(IAuthenticateUserOperation authenticateUserOperation
     {
         var result = await authenticateUserOperation.AuthenticateAsync(new AuthenticateUserOperationRequest(request.Login, request.Password)).ConfigureAwait(false);
 
-        return Ok(new AuthenticateUserResponse(result.IsAuthenticated));
+        return Ok(new AuthenticateUserResponse(result.Token));
     }
 }

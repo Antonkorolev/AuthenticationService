@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using BackendService.BusinessLogic.Tasks.CreateJwtToken.Models;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,17 +13,12 @@ public sealed class CreateJwtTokenTask : ICreateJwtTokenTask
     {
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, request.UserId.ToString())
+            new(JwtRegisteredClaimNames.Sub, request.UserId.ToString()),
+            new(
+                "permissions",
+                JsonSerializer.Serialize(request.RoleInfos),
+                JsonClaimValueTypes.JsonArray)
         };
-
-        foreach (var roleInfo in request.RoleInfos)
-        {
-            foreach (var permission in roleInfo.Permissions)
-            {
-                claims.Add(new Claim($"{roleInfo.RoleCode}", $"{permission.PermissionCode}"));
-
-            }
-        }
         
         var jwtToken = new JwtSecurityToken(
             issuer: "AuthServer",

@@ -2,6 +2,7 @@ using BackendService.BusinessLogic.Exceptions;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ValidateOldPassword;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ValidateOldPassword.Models;
 using BackendService.BusinessLogic.Tasks.GetHash;
+using BackendService.BusinessLogic.Tasks.GetHash.Models;
 using BackendService.BusinessLogic.Tasks.ValidatePassword;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -33,7 +34,7 @@ public sealed class ValidateOldPasswordTaskTests
 
         _getHashTask
             .Setup(g => g.GetAsync(login))
-            .ReturnsAsync(hash);
+            .ReturnsAsync(new GetHashTaskResponse(1, hash));
 
         _validatePasswordTask
             .Setup(v => v.ValidateAsync(password, hash))
@@ -50,7 +51,7 @@ public sealed class ValidateOldPasswordTaskTests
     {
         _getHashTask
             .Setup(g => g.GetAsync(It.IsAny<string>()))
-            .ReturnsAsync(It.IsAny<string>());
+            .ReturnsAsync(new GetHashTaskResponse(1, It.IsAny<string>()));
 
         _validatePasswordTask
             .Setup(v => v.ValidateAsync(It.IsAny<string>(), It.IsAny<string>()))

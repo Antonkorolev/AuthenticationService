@@ -40,8 +40,8 @@ public sealed class ChangePasswordTaskTests
     [TestMethod]
     public async Task ChangePasswordTask_SuccessfullyChanged()
     {
-        const int userId = 1;
-        const string login = "test";
+        const int userId = 2;
+        const string login = "testLogin1";
 
         const string newPassword = "test";
         const string newHash = "$2b$12$emPfIW8rmhnJuyLZt6FLPeXJ4wXwNaT5LrJ18LqYfd9f5cI5zMvOO"; // test

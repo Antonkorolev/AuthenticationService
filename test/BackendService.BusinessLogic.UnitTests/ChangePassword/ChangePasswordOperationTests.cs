@@ -3,6 +3,7 @@ using BackendService.BusinessLogic.Operations.ChangePassword.Models;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ChangePassword;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ValidateOldPassword;
 using BackendService.BusinessLogic.Tasks.GetHash;
+using BackendService.BusinessLogic.Tasks.GetHash.Models;
 using BackendService.BusinessLogic.Tasks.GetSalt;
 using BackendService.BusinessLogic.Tasks.GetSettings;
 using BackendService.BusinessLogic.Tasks.GetSettings.Models;
@@ -74,6 +75,10 @@ public sealed class ChangePasswordOperationTests
         await _userDbContext.AddAsync(new User { Login = login, Password = oldPassword, Salt = salt }).ConfigureAwait(false);
         await _userDbContext.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
 
+        _getHashTask
+            .Setup(g => g.GetAsync(login))
+            .ReturnsAsync(new GetHashTaskResponse(1, oldPassword));
+        
         _hashPasswordTask
             .Setup(h => h.HashAsync(It.IsAny<string>(), It.IsAny<string>()))
             .ReturnsAsync(It.IsAny<string>());

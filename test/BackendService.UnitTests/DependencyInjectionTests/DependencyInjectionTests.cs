@@ -41,6 +41,7 @@ public sealed class DependencyInjectionTests
 
         serviceCollection.AddUserDbContext("UserDb", configuration);
         serviceCollection.AddAuthenticateUserOperation();
+        serviceCollection.AddAuthorizationServiceClient("AuthClient", configuration);
         serviceCollection.AddAddUserOperation();
         serviceCollection.AddChangePasswordOperation();
         serviceCollection.AddCommonTasks();

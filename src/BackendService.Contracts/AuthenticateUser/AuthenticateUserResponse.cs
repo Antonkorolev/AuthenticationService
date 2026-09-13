@@ -1,6 +1,6 @@
 namespace BackendService.Contracts.AuthenticateUser;
 
-public sealed class AuthenticateUserResponse(bool isAuthenticated)
+public sealed class AuthenticateUserResponse(string token)
 {
-    public bool IsAuthenticated { get; set; } = isAuthenticated;
+    public string Token { get; set; } = token;
 }

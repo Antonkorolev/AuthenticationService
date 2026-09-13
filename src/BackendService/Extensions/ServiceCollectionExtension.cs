@@ -6,6 +6,7 @@ using BackendService.BusinessLogic.Operations.AuthenticateUser;
 using BackendService.BusinessLogic.Operations.ChangePassword;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ChangePassword;
 using BackendService.BusinessLogic.Operations.ChangePassword.Tasks.ValidateOldPassword;
+using BackendService.BusinessLogic.Tasks.CreateJwtToken;
 using BackendService.BusinessLogic.Tasks.GetHash;
 using BackendService.BusinessLogic.Tasks.GetSalt;
 using BackendService.BusinessLogic.Tasks.GetSettings;
@@ -35,6 +36,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddAuthenticateUserOperation(this IServiceCollection services)
     {
         services.AddTransient<IAuthenticateUserOperation, AuthenticateUserOperation>();
+        services.AddTransient<ICreateJwtTokenTask, CreateJwtTokenTask>();
         services.AddTransient<IValidatePasswordTask, ValidatePasswordTask>();
 
         return services;
